@@ -223,3 +223,64 @@ Connection Options:
 Some actions do not make sense in Ad-Hoc (include, meta, etc)
 
 root@e49ece7c8f4d:/# 
+
+root@5c1b58c56f78:~# ansible --version
+ansible [core 2.16.1]
+  config file = None
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.10/dist-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+root@5c1b58c56f78:~# cat /tmp/hosts 
+[myhosts]
+192.168.2.101
+192.168.2.249
+[all:vars]
+ansible_user=user
+ansible_ssh_pass='password'
+root@5c1b58c56f78:~# export ANSIBLE_CONFIG=/usr/local/etc/ansible/ansible.cfg 
+root@5c1b58c56f78:~# ansible --version
+ansible [core 2.16.1]
+  config file = /usr/local/etc/ansible/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.10/dist-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+root@5c1b58c56f78:~# ansible-playbook  playbook.yaml
+
+PLAY [My first play] **********************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************
+[WARNING]: Platform linux on host 192.168.2.101 is using the discovered Python interpreter at /usr/bin/python3.11, but future installation of another
+Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.16/reference_appendices/interpreter_discovery.html for more information.
+ok: [192.168.2.101]
+[WARNING]: Platform linux on host 192.168.2.249 is using the discovered Python interpreter at /usr/bin/python3.11, but future installation of another
+Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-
+core/2.16/reference_appendices/interpreter_discovery.html for more information.
+ok: [192.168.2.249]
+
+TASK [Ping my hosts] **********************************************************************************************************************************
+ok: [192.168.2.101]
+ok: [192.168.2.249]
+
+TASK [Print message] **********************************************************************************************************************************
+ok: [192.168.2.101] => {
+    "msg": "Hello world"
+}
+ok: [192.168.2.249] => {
+    "msg": "Hello world"
+}
+
+PLAY RECAP ********************************************************************************************************************************************
+192.168.2.101              : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+192.168.2.249              : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+root@5c1b58c56f78:~# 
+
