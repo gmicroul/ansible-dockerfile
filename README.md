@@ -3,7 +3,7 @@
 sudo podman run -it ansible
 
 
-root@e49ece7c8f4d:/# ansible --version
+root@e49ece7c8f4d:/# ansible --version 
 ansible [core 2.16.1]
   config file = None
   configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
